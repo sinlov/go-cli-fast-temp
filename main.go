@@ -22,10 +22,9 @@ type config struct {
 type filterCLI struct {
 	cli.Helper
 	Version bool `cli:"version" usage:"version"`
-	Verbose bool `cli:"v,verbose" usage:"see Verbose of utils"`
+	Verbose bool `cli:"verbose" usage:"see Verbose of utils"`
 	Port int  `cli:"p,port" usage:"short and long format flags both are supported"`
 	Id uint8 `cli:"*id" usage:"this is a required flag, note the *"`
-	Path string `cli:"p,path" usage:"path of file"`
 	Env    string `cli:"env" usage:"env variable as default" dft:"$HOME"`
 	Expr   int    `cli:"expr" usage:"expression as default" dft:"$BASE_PORT+1000"`
 	DevDir string `cli:"devdir" usage:"directory of developer" dft:"$HOME/dev"`
@@ -33,7 +32,7 @@ type filterCLI struct {
 	Required int  `cli:"*r" usage:"required flag"`
 
 	Username string `cli:"u,username" usage:"github account" prompt:"type github account"`
-	Password string `pw:"p,password" usage:"password of github account" prompt:"type the password"`
+	Password string `pw:"password" usage:"password of github account" prompt:"type the password"`
 
 	PidFile clix.PidFile `cli:"pid" usage:"pid file" dft:"013-pidfile.pid"`
 	Time     clix.Time     `cli:"t" usage:"time"`
