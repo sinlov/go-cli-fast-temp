@@ -9,8 +9,10 @@ VERSION_PATCH=1
 VERSION_BUILD=0
 
 build_file="main.go"
-bit_support=(amd64 386)
-build_platform=(darwin linux windows)
+bit_support=(amd64)
+#bit_support=(amd64 386)
+build_platform=(darwin)
+#build_platform=(darwin linux windows)
 #build_platform[0]=plugintemp
 
 VersionCode=$[$[VERSION_MAJOR * 100000000] + $[VERSION_MINOR * 100000] + $[VERSION_PATCH * 100] + $[VERSION_BUILD]]
