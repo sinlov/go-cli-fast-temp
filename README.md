@@ -2,8 +2,8 @@
 
 # this is my GoLang CLI fast temp
 
-- os OSX 10.10.5
-- golang version 1.7.1
+- os OSX 10.11.6
+- golang version 1.9.2
 
 more use in https://github.com/mkideal/cli
 
@@ -19,7 +19,7 @@ more use in https://github.com/mkideal/cli
 
 ---
 
-Copyright 2016 sinlovgm@gmail.com
+Copyright 2017 sinlovgm@gmail.com
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
