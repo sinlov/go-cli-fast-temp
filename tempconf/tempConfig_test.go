@@ -18,17 +18,18 @@ func TestTry2FindOutConfigPath(t *testing.T) {
 			wantConfigPath  string
 			wantProjectFile string
 		}{
-			wantConfigPath:  filepath.Join(goFirstPath, "src", "github.com", "sinlov", "go-cli-fast-temp", "temp.conf"),
-			wantProjectFile: filepath.Join(goFirstPath, "src", "github.com", "sinlov", "go-cli-fast-temp", "build"),
+			wantConfigPath:  filepath.Join(goFirstPath, "src", gitHost, gitUser, gitRepo, defaultConfPath),
+			wantProjectFile: filepath.Join(goFirstPath, "src", gitHost, gitUser, gitRepo, "build"),
 		}
+		customPath := defaultConfPath
 		customData := struct {
 			custom          string
 			wantConfigPath  string
 			wantProjectFile string
 		}{
-			custom:          "temp.conf",
-			wantConfigPath:  filepath.Join(goFirstPath, "src", "github.com", "sinlov", "go-cli-fast-temp", "temp.conf"),
-			wantProjectFile: filepath.Join(goFirstPath, "src", "github.com", "sinlov", "go-cli-fast-temp", "build"),
+			custom:          customPath,
+			wantConfigPath:  filepath.Join(goFirstPath, "src", gitHost, gitUser, gitRepo, customPath),
+			wantProjectFile: filepath.Join(goFirstPath, "src", gitHost, gitUser, gitRepo, "build"),
 		}
 		convey.Convey("do TestTry2FindOutConfigPath", func() {
 			// do
