@@ -18,9 +18,15 @@ const (
 )
 
 // if not find config Path just try to use GOPATH code github.com/ShubNig/AubNig/config.conf
+// and project path in dev is $project_path/build
+// custom will cover defaultConfPath
 // if code aubnig.conf and run root path not found, return ""
-func Try2FindOutConfigPath() (string, string, error) {
-	configFilePath := filepath.Join(sCli.CommandPath(), defaultConfPath)
+func Try2FindOutConfigPath(custom string) (string, string, error) {
+	configPath := defaultConfPath
+	if custom != "" {
+		configPath = custom
+	}
+	configFilePath := filepath.Join(sCli.CommandPath(), configPath)
 	projectPath := sCli.CurrentDirectory()
 	if sFiles.IsFileExist(configFilePath) {
 		return configFilePath, projectPath, nil
@@ -31,7 +37,7 @@ func Try2FindOutConfigPath() (string, string, error) {
 	isFindDevConf := false
 	for _, path := range goPathEnvS {
 		codePath := filepath.Join(path, "src", gitHost, gitUser, gitRepo)
-		futurePath := filepath.Join(codePath, defaultConfPath)
+		futurePath := filepath.Join(codePath, configPath)
 		projectPath = filepath.Join(codePath, "build")
 		if sFiles.IsFileExist(futurePath) {
 			configFilePath = futurePath

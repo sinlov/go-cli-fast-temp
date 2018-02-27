@@ -21,16 +21,28 @@ func TestTry2FindOutConfigPath(t *testing.T) {
 			wantConfigPath:  filepath.Join(goFirstPath, "src", "github.com", "sinlov", "go-cli-fast-temp", "temp.conf"),
 			wantProjectFile: filepath.Join(goFirstPath, "src", "github.com", "sinlov", "go-cli-fast-temp", "build"),
 		}
+		customData := struct {
+			custom          string
+			wantConfigPath  string
+			wantProjectFile string
+		}{
+			custom:          "temp.conf",
+			wantConfigPath:  filepath.Join(goFirstPath, "src", "github.com", "sinlov", "go-cli-fast-temp", "temp.conf"),
+			wantProjectFile: filepath.Join(goFirstPath, "src", "github.com", "sinlov", "go-cli-fast-temp", "build"),
+		}
 		convey.Convey("do TestTry2FindOutConfigPath", func() {
 			// do
-			configPath, projectFile, err := Try2FindOutConfigPath()
+			configPath, projectFile, err := Try2FindOutConfigPath("")
+			customConfigPath, customProjectFile, errCustom := Try2FindOutConfigPath(customData.custom)
 			convey.Convey("verify TestTry2FindOutConfigPath", func() {
 				// verify
-				if err != nil {
-					t.Errorf("find config Error, %s", err)
+				if err != nil || errCustom != nil {
+					t.Errorf("find config Error, %s, %s", err, errCustom)
 				} else {
 					convey.So(configPath, convey.ShouldEqual, data.wantConfigPath)
+					convey.So(customConfigPath, convey.ShouldEqual, customData.wantConfigPath)
 					convey.So(projectFile, convey.ShouldEqual, data.wantProjectFile)
+					convey.So(customProjectFile, convey.ShouldEqual, customData.wantProjectFile)
 				}
 
 			})
