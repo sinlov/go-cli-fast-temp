@@ -7,24 +7,25 @@ import (
 	"strings"
 	sFiles "github.com/sinlov/golang_utils/files"
 	sCli "github.com/sinlov/golang_utils/cli"
+	"errors"
 )
 
 const (
 	defaultConfPath = "temp.conf"
-	gitRepo         = "temp"
+	gitRepo         = "go-cli-fast-temp"
 	gitUser         = "sinlov"
 	gitHost         = "github.com"
 )
 
 // if not find config Path just try to use GOPATH code github.com/ShubNig/AubNig/config.conf
 // if code aubnig.conf and run root path not found, return ""
-func Try2FindOutConfigPath() (string, string) {
-	configFilePath := filepath.Join(sCli.CommandPath(), "aubnig.conf")
+func Try2FindOutConfigPath() (string, string, error) {
+	configFilePath := filepath.Join(sCli.CommandPath(), defaultConfPath)
 	projectPath := sCli.CurrentDirectory()
 	if sFiles.IsFileExist(configFilePath) {
-		return configFilePath, projectPath
+		return configFilePath, projectPath, nil
 	}
-	fmt.Printf("\nWarning!\nCan not find config.conf file at aubnig path: %s\n", sCli.CommandPath())
+	sCli.FmtYellow("\nWarning!\nCan not find config file at path: %s\n", sCli.CommandPath())
 	goPathEnv := os.Getenv("GOPATH")
 	goPathEnvS := strings.Split(goPathEnv, ":")
 	isFindDevConf := false
@@ -39,10 +40,11 @@ func Try2FindOutConfigPath() (string, string) {
 		}
 	}
 	if isFindDevConf {
-		fmt.Printf("just use dev config at path: %s\n", configFilePath)
+		sCli.FmtCyan("just use dev config at path: %s\n", configFilePath)
+		return configFilePath, projectPath, nil
 	} else {
-		fmt.Printf("can not load config at path: %s\nExit 1\n", configFilePath)
+		errInfo := fmt.Sprintf("can not load config at path: %s\nExit 1\n", configFilePath)
 		configFilePath = ""
+		return configFilePath, projectPath, errors.New(errInfo)
 	}
-	return configFilePath, projectPath
 }
