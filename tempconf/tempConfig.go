@@ -18,7 +18,7 @@ const (
 )
 
 // if not find config Path just try to use GOPATH code github.com/ShubNig/AubNig/config.conf
-// and project path in dev is $project_path/build
+// and current path in dev is $project_path/build
 // custom will cover defaultConfPath
 // if code aubnig.conf and run root path not found, return ""
 func Try2FindOutConfigPath(custom string) (string, string, error) {
@@ -27,9 +27,9 @@ func Try2FindOutConfigPath(custom string) (string, string, error) {
 		configPath = custom
 	}
 	configFilePath := filepath.Join(sCli.CommandPath(), configPath)
-	projectPath := sCli.CurrentDirectory()
+	currentPath := sCli.CurrentDirectory()
 	if sFiles.IsFileExist(configFilePath) {
-		return configFilePath, projectPath, nil
+		return configFilePath, currentPath, nil
 	}
 	sCli.FmtYellow("\nWarning!\nCan not find config file at path: %s\n", sCli.CommandPath())
 	goPathEnv := os.Getenv("GOPATH")
@@ -38,7 +38,7 @@ func Try2FindOutConfigPath(custom string) (string, string, error) {
 	for _, path := range goPathEnvS {
 		codePath := filepath.Join(path, "src", gitHost, gitUser, gitRepo)
 		futurePath := filepath.Join(codePath, configPath)
-		projectPath = filepath.Join(codePath, "build")
+		currentPath = filepath.Join(codePath, "build")
 		if sFiles.IsFileExist(futurePath) {
 			configFilePath = futurePath
 			isFindDevConf = true
@@ -47,10 +47,10 @@ func Try2FindOutConfigPath(custom string) (string, string, error) {
 	}
 	if isFindDevConf {
 		sCli.FmtCyan("just use dev config at path: %s\n", configFilePath)
-		return configFilePath, projectPath, nil
+		return configFilePath, currentPath, nil
 	} else {
 		errInfo := fmt.Sprintf("can not load config at path: %s\nExit 1\n", configFilePath)
 		configFilePath = ""
-		return configFilePath, projectPath, errors.New(errInfo)
+		return configFilePath, currentPath, errors.New(errInfo)
 	}
 }
