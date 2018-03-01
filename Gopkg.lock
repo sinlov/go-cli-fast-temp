@@ -17,13 +17,7 @@
   branch = "master"
   name = "github.com/gopherjs/gopherjs"
   packages = ["js"]
-  revision = "4e9f423448a0b0462d41b077c43bb9f2a5d103c6"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/jinzhu/now"
-  packages = ["."]
-  revision = "d939ba741945c047cac69c329c5fb0d6b4a06520"
+  revision = "df18d38287ab2ed3138d564e7c8cbe4d5a249d87"
 
 [[projects]]
   name = "github.com/jtolds/gls"
@@ -50,20 +44,21 @@
   version = "v0.0.3"
 
 [[projects]]
+  branch = "master"
   name = "github.com/mkideal/cli"
   packages = [
     ".",
     "ext"
   ]
-  revision = "0bc4738ef26827a45d3b50394d84d283f733ad63"
-  version = "v0.0.1"
+  revision = "a9c1104566927924fdb041d198f05617492913f9"
 
 [[projects]]
   branch = "master"
   name = "github.com/mkideal/pkg"
   packages = [
     "debug",
-    "expr"
+    "expr",
+    "osutil/pid"
   ]
   revision = "3e188c9e7ecc83d0fe7040a9161ce3c67885470d"
 
@@ -112,6 +107,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "bd18888556cd649bae8c61df89343deabff846d04ffbbb2a272c6f520a88f5eb"
+  inputs-digest = "101a64bec268ea6b1a67a2e24b843ac30bc7d7f41e0c311d59d9e3ad3fd7c5df"
   solver-name = "gps-cdcl"
   solver-version = 1
