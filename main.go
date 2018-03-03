@@ -34,7 +34,7 @@ type filterCLI struct {
 	Username string `cli:"u,username" usage:"github account" prompt:"type github account"`
 	Password string `pw:"password" usage:"password of github account" prompt:"type the password"`
 
-	PidFile clix.PidFile `cli:"pid" usage:"pid file" dft:"013-pidfile.pid"`
+	//PidFile clix.PidFile `cli:"pid" usage:"pid file" dft:"013-pidfile.pid"`
 	Time     clix.Time     `cli:"t" usage:"time"`
 	Duration clix.Duration `cli:"d" usage:"duration"`
 
